@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import AddPost from '../Modal/Post/Add';
+import AddComment from '../Modal/Comment/Add';
 
 class ListPosts extends Component{
   render(){
@@ -22,6 +23,7 @@ class ListPosts extends Component{
               </div>
                <div class="panel-footer">
                 <p>Comentarios</p>
+                <AddComment></AddComment>
                </div>
             </div>
           </Col>
