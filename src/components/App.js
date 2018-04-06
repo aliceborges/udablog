@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Navbar, Grid } from 'react-bootstrap';
-import ListPosts from './ListPosts';
+import ListPosts from './Post/ListPosts';
 
-import '../style/bootstrap.min.css';
+import '../styles/css/bootstrap.min.css';
 
 class App extends Component {
   render() {
