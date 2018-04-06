@@ -16,22 +16,24 @@ const ConnectedListPosts = ({ post }) => (
       </Col>
     </Row>
     <br/>
-    <Row>
-      <Col md={12}>
-        <Panel bsStyle="primary">
-          <Panel.Heading>
-            <Panel.Title>Titulo</Panel.Title>
-            <h6>Autor - Data de Postagem</h6>
-          </Panel.Heading>
-          <Panel.Body>
-            Conteudo
-          </Panel.Body>
-          <Panel.Footer>
-            <CommentPanel></CommentPanel>
-          </Panel.Footer>
-        </Panel>
-      </Col>
-    </Row>
+    {post.map(postData => (
+      <Row key={ postData.id }>
+        <Col md={12}>
+          <Panel bsStyle="primary">
+            <Panel.Heading>
+              <Panel.Title>{ postData.title }</Panel.Title>
+              <h6> { postData.author } - { postData.timestamp }</h6>
+            </Panel.Heading>
+            <Panel.Body>
+              { postData.body }
+            </Panel.Body>
+            <Panel.Footer>
+              <CommentPanel></CommentPanel>
+            </Panel.Footer>
+          </Panel>
+        </Col>
+      </Row>
+    ))}
   </div>
 );
 

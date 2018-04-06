@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Modal, Button, FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap';
 
-class AddPost extends Component{
+class AddComment extends Component{
   constructor(props, context){
     super(props, context);
 
@@ -25,23 +25,19 @@ class AddPost extends Component{
     return(
       <div>
         <Button bsStyle='primary' onClick={this.handleShow}>
-          <Glyphicon glyph="plus" /> Adicionar Post
+          <Glyphicon glyph="plus" /> Adicionar Comentario
         </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header>
             <Modal.Title>
-              Adicionar Post
+              Adicionar Comentario
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <form>
-              <FormGroup controlId='titulo'>
-                <ControlLabel>Titulo:</ControlLabel>
-                <FormControl id='titulo' type='text'/>
-              </FormGroup>
               <FormGroup controlId='conteudo'>
-                <ControlLabel>Conteudo:</ControlLabel>
+                <ControlLabel>Comentario:</ControlLabel>
                 <FormControl id='conteudo' type='text'/>
               </FormGroup>
               <FormGroup controlId='autor'>
@@ -52,7 +48,7 @@ class AddPost extends Component{
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Fechar</Button>
-            <Button bsStyle='primary'>Cadastrar</Button>
+            <Button bsStyle='primary'>Comentar</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -60,4 +56,4 @@ class AddPost extends Component{
   }
 }
 
-export default AddPost;
+export default AddComment;
