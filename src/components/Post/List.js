@@ -27,10 +27,7 @@ const ConnectedListPosts = ({ post }) => (
             Conteudo
           </Panel.Body>
           <Panel.Footer>
-            <Panel.Heading>Comentarios</Panel.Heading>
-            <Panel.Body>
-              <CommentPanel></CommentPanel>
-            </Panel.Body>
+            <CommentPanel></CommentPanel>
           </Panel.Footer>
         </Panel>
       </Col>
