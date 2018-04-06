@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Grid } from 'react-bootstrap';
+import ListPosts from './ListPosts';
 
 import '../style/bootstrap.min.css';
 
@@ -8,6 +9,9 @@ class App extends Component {
     return (
       <div>
         <Navbar>Udablog - Blog da Udacity</Navbar>
+        <Grid>
+          <ListPosts></ListPosts>
+        </Grid>
       </div>
     );
   }
