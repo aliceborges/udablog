@@ -8,7 +8,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar>Udablog - Blog da Udacity</Navbar>
+        <Navbar class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Udablog - Blog da Udacity</a>
+            </div>
+          </div>
+        </Navbar>
         <Grid>
           <ListPosts></ListPosts>
         </Grid>
