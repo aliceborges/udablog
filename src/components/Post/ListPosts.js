@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Panel } from 'react-bootstrap';
 import AddPost from '../Modal/Post/Add';
 import CommentPanel from '../Comment/CommentPanel';
 
@@ -15,17 +15,21 @@ class ListPosts extends Component{
         <br/>
         <Row>
           <Col md={12}>
-            <div class='panel panel-default'>
-              <div class="panel-body">
-                <h1>Titulo</h1>
+            <Panel bsStyle="primary">
+              <Panel.Heading>
+                <Panel.Title>Titulo</Panel.Title>
                 <h6>Autor - Data de Postagem</h6>
-                <p>Conteudo</p>
-              </div>
-               <div class="panel-footer">
-                <p>Comentarios</p>
-                <CommentPanel></CommentPanel>
-               </div>
-            </div>
+              </Panel.Heading>
+              <Panel.Body>
+                Conteudo
+              </Panel.Body>
+              <Panel.Footer>
+                <Panel.Heading>Comentarios</Panel.Heading>
+                <Panel.Body>
+                  <CommentPanel></CommentPanel>
+                </Panel.Body>
+              </Panel.Footer>
+            </Panel>
           </Col>
         </Row>
       </div>

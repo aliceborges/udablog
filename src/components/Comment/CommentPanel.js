@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Panel } from 'react-bootstrap';
 import AddComment from '../Modal/Comment/Add';
 
 class CommentPanel extends Component{
   render(){
     return(
       <div>
-        <p>Conteudo</p>
-        <h6>Autor - Data</h6>
-        <AddComment></AddComment>
+        <Panel bsStyle="primary">
+          <Panel.Heading>Autor - Data</Panel.Heading>
+          <Panel.Body>
+            <p>Conteudo</p>
+          </Panel.Body>
+          <Panel.Footer>
+            <AddComment></AddComment>
+          </Panel.Footer>
+        </Panel>
       </div>
     );
   };
