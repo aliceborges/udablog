@@ -1,7 +1,17 @@
 import React, {Component} from 'react';
 import {Modal, Button, FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import uuidv1 from 'uuid';
+import serializeForm from 'form-serialize';
+import { addPost } from '../../../actions';
 
-class AddComment extends Component{
+const mapDispatchToProps = dispatch => {
+  return{
+    addPost: post => dispatch(addPost(post))
+  };
+};
+
+class AddPost extends Component{
   constructor(props, context){
     super(props, context);
 
@@ -21,34 +31,46 @@ class AddComment extends Component{
     this.setState({show:false});
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const post = serializeForm(e.target, {hash:true});
+    post.id = uuidv1();
+    this.props.addPost(post);
+    this.setState({show:false});
+  }
+
   render(){
     return(
       <div>
         <Button bsStyle='primary' onClick={this.handleShow}>
-          <Glyphicon glyph="plus" /> Adicionar Comentario
+          <Glyphicon glyph="plus" /> Adicionar Post
         </Button>
 
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header>
             <Modal.Title>
-              Adicionar Comentario
+              Adicionar Post
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form>
-              <FormGroup controlId='conteudo'>
-                <ControlLabel>Comentario:</ControlLabel>
-                <FormControl id='conteudo' type='text'/>
+            <form onSubmit={this.handleSubmit}>
+              <FormGroup controlId='title'>
+                <ControlLabel>Titulo:</ControlLabel>
+                <FormControl id='title' type='text'/>
               </FormGroup>
-              <FormGroup controlId='autor'>
+              <FormGroup controlId='body'>
+                <ControlLabel>Conteudo:</ControlLabel>
+                <FormControl id='body' type='text'/>
+              </FormGroup>
+              <FormGroup controlId='author'>
                 <ControlLabel>Autor:</ControlLabel>
-                <FormControl id='autor' type='text'/>
+                <FormControl id='author' type='text'/>
               </FormGroup>
             </form>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Fechar</Button>
-            <Button bsStyle='primary'>Comentar</Button>
+            <Button bsStyle='primary'>Cadastrar</Button>
           </Modal.Footer>
         </Modal>
       </div>
@@ -56,4 +78,4 @@ class AddComment extends Component{
   }
 }
 
-export default AddComment;
+export default connect(null, mapDispatchToProps)(AddPost);
