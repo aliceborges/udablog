@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Grid } from 'react-bootstrap';
-import ListPosts from './Post/ListPosts';
+import ListPosts from './Post/List';
 
 import '../styles/css/bootstrap.min.css';
 
