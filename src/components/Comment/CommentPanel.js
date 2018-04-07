@@ -4,20 +4,25 @@ import AddComment from '../Modal/Comment/Add';
 
 class CommentPanel extends Component{
   render(){
+
+    const { postData } = this.props
+
     return(
       <div>
         <Panel.Heading>Comentarios</Panel.Heading>
-        <Panel.Body>
-          <Panel bsStyle="primary">
-            <Panel.Heading>Autor - Data</Panel.Heading>
-            <Panel.Body>
-              <p>Conteudo</p>
+        { this.props.comment && this.props.comment.map(commentData => (
+          <Panel.Body key = { commentData.id }>
+            <Panel bsStyle="primary">
+              <Panel.Heading>{ commentData.author } - { commentData.timestamp }</Panel.Heading>
+              <Panel.Body>
+                <p> { commentData.body } </p>
+              </Panel.Body>
+            </Panel>
             </Panel.Body>
-          </Panel>
-          </Panel.Body>
-          <Panel.Footer>
-            <AddComment></AddComment>
-          </Panel.Footer>
+        ))}
+        <Panel.Footer>
+          <AddComment idPost = { postData.id }></AddComment>
+        </Panel.Footer>
       </div>
     );
   };

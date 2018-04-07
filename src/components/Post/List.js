@@ -28,7 +28,11 @@ const ConnectedListPosts = ({ post }) => (
               { postData.body }
             </Panel.Body>
             <Panel.Footer>
-              <CommentPanel></CommentPanel>
+              <CommentPanel
+                idPost = {postData.id}
+                key = {postData.id}
+              >
+              </CommentPanel>
             </Panel.Footer>
           </Panel>
         </Col>

@@ -1,5 +1,15 @@
 import React, {Component} from 'react';
 import {Modal, Button, FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import uuidv1 from 'uuid';
+import serializeForm from 'form-serialize';
+import { addComment } from '../../../actions';
+
+const mapDispatchToProps = dispatch => {
+  return{
+    addComment: comment => dispatch(addComment(comment))
+  };
+};
 
 class AddComment extends Component{
   constructor(props, context){
@@ -9,16 +19,26 @@ class AddComment extends Component{
     this.handleClose = this.handleClose.bind(this);
 
     this.state = {
-      show:false
+      show:false,
+      idPost: props.idPost
     };
   }
 
   handleShow(){
-    this.setState({show:true});
+    this.setState({...this.state, show:true});
   }
 
   handleClose(){
-    this.setState({show:false});
+    this.setState({...this.state, show:false});
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const comment = serializeForm(e.target, { hash: true });
+    comment.id = uuidv1();
+    comment.parentId = this.state.idPost;
+    this.props.addComment(comment);
+    this.setState({ ...this.state, show: false });
   }
 
   render(){
@@ -34,26 +54,26 @@ class AddComment extends Component{
               Adicionar Comentario
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <form>
-              <FormGroup controlId='conteudo'>
+          <form onSubmit = { this.handleSubmit }>
+            <Modal.Body>
+              <FormGroup controlId='body'>
                 <ControlLabel>Comentario:</ControlLabel>
-                <FormControl id='conteudo' type='text'/>
+                <FormControl id='body' type='text'/>
               </FormGroup>
-              <FormGroup controlId='autor'>
+              <FormGroup controlId='author'>
                 <ControlLabel>Autor:</ControlLabel>
-                <FormControl id='autor' type='text'/>
+                <FormControl id='author' type='text'/>
               </FormGroup>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.handleClose}>Fechar</Button>
-            <Button bsStyle='primary'>Comentar</Button>
-          </Modal.Footer>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.handleClose}>Fechar</Button>
+              <Button bsStyle='primary' type='submit'>Comentar</Button>
+            </Modal.Footer>
+          </form>
         </Modal>
       </div>
     );
   }
 }
 
-export default AddComment;
+export default connect (null, mapDispatchToProps)(AddComment);
