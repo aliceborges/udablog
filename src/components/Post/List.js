@@ -27,7 +27,6 @@ const ConnectedListPosts = ({ post }) => (
             </Panel.Heading>
             <Panel.Body>
               { postData.body }
-              <EditPost></EditPost>
             </Panel.Body>
             <Panel.Footer>
               <CommentPanel
