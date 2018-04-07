@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Panel } from 'react-bootstrap';
 import AddPost from '../Modal/Post/Add';
+import EditPost from '../Modal/Post/Edit';
 import CommentPanel from '../Comment/CommentPanel';
 import { connect } from 'react-redux';
 
@@ -26,6 +27,7 @@ const ConnectedListPosts = ({ post }) => (
             </Panel.Heading>
             <Panel.Body>
               { postData.body }
+              <EditPost></EditPost>
             </Panel.Body>
             <Panel.Footer>
               <CommentPanel
