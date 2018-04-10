@@ -7,7 +7,10 @@ import { connect } from 'react-redux';
 import { removePost } from '../../actions';
 
 const mapStateToProps = state => {
-  return { post: state.post };
+  return {
+    post: state.post,
+    categories: state.categories
+  };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -16,7 +19,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const ConnectedListPosts = ({ post }) => (
+const ConnectedListPosts = ({ post, categories, removePost }) => (
   <div>
     <Row>
       <Col md={12}>
@@ -24,28 +27,33 @@ const ConnectedListPosts = ({ post }) => (
       </Col>
     </Row>
     <br/>
-    {post.filter(postData => !postData.deleted).map(postData => (
-      <Row key={ postData.id }>
-        <Col md={12}>
-          <Panel bsStyle="primary">
-            <Panel.Heading>
-              <Panel.Title>{ postData.title }</Panel.Title>
-              <h6> { postData.author } - { postData.timestamp }</h6>
-            </Panel.Heading>
-            <Panel.Body>
-              { postData.body }
-              <Button onClick={() => {removePost(postData.id)}}> Remover Post </Button>
-            </Panel.Body>
-            <Panel.Footer>
-              <CommentPanel
-                idPost = {postData.id}
-                key = {postData.id}
-              >
-              </CommentPanel>
-            </Panel.Footer>
-          </Panel>
-        </Col>
-      </Row>
+    {categories.map(categorie => (
+      <div key = { categorie.id }>
+        <h2>{ categorie.name }</h2>
+        {post.filter(postData => !postData.deleted).map(postData => (
+          <Row key={ postData.id }>
+            <Col md={12}>
+              <Panel bsStyle="primary">
+                <Panel.Heading>
+                  <Panel.Title>{ postData.title }</Panel.Title>
+                  <h6> { postData.author } - { postData.timestamp }</h6>
+                </Panel.Heading>
+                <Panel.Body>
+                  { postData.body }
+                  <Button onClick={() => {removePost(postData.id)}}> Remover Post </Button>
+                </Panel.Body>
+                <Panel.Footer>
+                  <CommentPanel
+                    idPost = {postData.id}
+                    key = {postData.id}
+                  >
+                  </CommentPanel>
+                </Panel.Footer>
+              </Panel>
+            </Col>
+          </Row>
+        ))}
+      </div>
     ))}
   </div>
 );

@@ -11,6 +11,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
+const mapStateToProps = state => {
+  return { categories: state.categories };
+};
+
 class AddPost extends Component{
   constructor(props, context){
     super(props, context);
@@ -54,6 +58,14 @@ class AddPost extends Component{
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={this.handleSubmit}>
+              <FormGroup controlId='idCategorie'>
+                <ControlLabel>Categoria:</ControlLabel>
+                <FormControl componentClass='select' name='idCategorie' id='idCategorie'>
+                  {this.props.categories.map(categorie => (
+                    <option key={categorie.id} value={categorie.id}>{categorie.name}</option>
+                  ))}
+                </FormControl>
+              </FormGroup>
               <FormGroup controlId='title'>
                 <ControlLabel>Titulo:</ControlLabel>
                 <FormControl id='title' type='text'/>
@@ -78,4 +90,4 @@ class AddPost extends Component{
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddPost);
+export default connect(mapStateToProps, mapDispatchToProps)(AddPost);

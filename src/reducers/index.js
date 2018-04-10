@@ -8,7 +8,11 @@ import {
 } from '../actions';
 import { searchId } from '../util/helper';
 
-const initialState = { post: [] };
+const initialState = {
+  categories: [],
+  post: [],
+  comment: []
+};
 
 const reducer = (state = initialState, action) => {
   switch(action.type){
