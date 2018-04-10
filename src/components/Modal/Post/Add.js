@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import uuidv1 from 'uuid';
 import serializeForm from 'form-serialize';
 import { addPost } from '../../../actions';
+import * as PostApi from '../../../util/PostApi';
 
 const mapDispatchToProps = dispatch => {
   return{

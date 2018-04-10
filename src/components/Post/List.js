@@ -30,7 +30,7 @@ const ConnectedListPosts = ({ post, categories, removePost }) => (
     {categories.map(category => (
       <div key = { category.path }>
         <h2>{ category.name }</h2>
-        {post.filter(postData => !postData.deleted && post.category === category.path).map(postData => (
+        {post.filter(postData => !postData.deleted && postData.category === category.path).map(postData => (
           <Post
             key = {postData}
             post = {postData}
