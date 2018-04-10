@@ -1,8 +1,6 @@
 import React from 'react';
 import { Row, Col, Panel, Button } from 'react-bootstrap';
 import AddPost from '../Modal/Post/Add';
-import EditPost from '../Modal/Post/Edit';
-import CommentPanel from '../Comment/CommentPanel';
 import { connect } from 'react-redux';
 import { removePost } from '../../actions';
 import * as PostApi from '../../util/PostApi';

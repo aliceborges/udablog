@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Panel, Button } from 'react-bootstrap';
-import AddPost from '../Modal/Post/Add';
 import EditPost from '../Modal/Post/Edit';
 import CommentPanel from '../Comment/CommentPanel';
-import { connect } from 'react-redux';
 import { removePost } from '../../actions';
 import * as PostApi from '../../util/PostApi';
 
@@ -32,6 +30,11 @@ class Post extends Component{
                 Remover Post
               </Button>
             </Panel.Body>
+            <EditPost
+              key = {post.id}
+              idPost = {post.id}
+              post = {post}
+            ></EditPost>
             <Panel.Footer>
               <CommentPanel
                 idPost = {post.id}
