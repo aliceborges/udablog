@@ -16,7 +16,7 @@ class Post extends Component{
           <Panel bsStyle="primary">
             <Panel.Heading>
               <Panel.Title>{ post.title }</Panel.Title>
-              <h6> { post.author } - { post.timestamp }</h6>
+              <h6> { post.author } - { Date(post.timestamp) }</h6>
             </Panel.Heading>
             <Panel.Body>
               { post.body }
