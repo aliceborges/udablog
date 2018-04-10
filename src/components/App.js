@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, Grid } from 'react-bootstrap';
 import ListPosts from './Post/List';
+import { connect } from 'react-redux';
 
 import '../styles/css/bootstrap.min.css';
 

@@ -4,7 +4,8 @@ import {
   REMOVE_POST,
   ADD_COMMENT,
   EDIT_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  ADD_CATEGORY
 } from '../actions';
 import { searchId } from '../util/helper';
 
@@ -74,6 +75,8 @@ const reducer = (state = initialState, action) => {
         }
       });
       return {...state, comment: deleteComment };
+    case ADD_CATEGORY:
+      return {...state, categories: [...state.categories, action.category]};
     default:
       return state;
     }
