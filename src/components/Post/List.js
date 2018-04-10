@@ -5,7 +5,8 @@ import EditPost from '../Modal/Post/Edit';
 import CommentPanel from '../Comment/CommentPanel';
 import { connect } from 'react-redux';
 import { removePost } from '../../actions';
-import * as PostApi from '../../util/PostApi'
+import * as PostApi from '../../util/PostApi';
+import Post from './Post';
 
 const mapStateToProps = state => {
   return {
@@ -32,35 +33,10 @@ const ConnectedListPosts = ({ post, categories, removePost }) => (
       <div key = { category.path }>
         <h2>{ category.name }</h2>
         {post.filter(postData => !postData.deleted && post.category === category.path).map(postData => (
-          <Row key={ postData.id }>
-            <Col md={12}>
-              <Panel bsStyle="primary">
-                <Panel.Heading>
-                  <Panel.Title>{ postData.title }</Panel.Title>
-                  <h6> { postData.author } - { postData.timestamp }</h6>
-                </Panel.Heading>
-                <Panel.Body>
-                  { postData.body }
-                  <Button
-                    onClick={() => {
-                      PostApi.remove(postData.id).then(()=>{
-                        removePost(postData.id);
-                      });
-                    }}
-                  >
-                    Remover Post
-                  </Button>
-                </Panel.Body>
-                <Panel.Footer>
-                  <CommentPanel
-                    idPost = {postData.id}
-                    key = {postData.id}
-                  >
-                  </CommentPanel>
-                </Panel.Footer>
-              </Panel>
-            </Col>
-          </Row>
+          <Post
+            key = {postData}
+            post = {postData}
+          ></Post>
         ))}
       </div>
     ))}
