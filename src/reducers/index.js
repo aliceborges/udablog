@@ -1,6 +1,7 @@
 import {
   ADD_POST,
   EDIT_POST,
+  REMOVE_POST,
   ADD_COMMENT,
   EDIT_COMMENT
 } from '../actions';
@@ -24,8 +25,16 @@ const reducer = (state = initialState, action) => {
           return item;
         }
       });
-
       return {...state, post: updatePost};
+    case REMOVE_POST:
+      const deletePost = state.post.map(item => {
+        if(item.id === action.idPost){
+          return {...item, deleted: true};
+        }
+        else{
+          return item;
+        }
+      });
     case ADD_COMMENT:
       const index = searchId(state.post, action.comment.parentId);
       const post = state.post[index];

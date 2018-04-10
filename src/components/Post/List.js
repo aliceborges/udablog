@@ -1,12 +1,19 @@
 import React from 'react';
-import { Row, Col, Panel } from 'react-bootstrap';
+import { Row, Col, Panel, Button } from 'react-bootstrap';
 import AddPost from '../Modal/Post/Add';
 import EditPost from '../Modal/Post/Edit';
 import CommentPanel from '../Comment/CommentPanel';
 import { connect } from 'react-redux';
+import { removePost } from '../../actions';
 
 const mapStateToProps = state => {
   return { post: state.post };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    removePost: idPost => dispatch(removePost(idPost))
+  };
 };
 
 const ConnectedListPosts = ({ post }) => (
@@ -17,7 +24,7 @@ const ConnectedListPosts = ({ post }) => (
       </Col>
     </Row>
     <br/>
-    {post.map(postData => (
+    {post.filter(postData => !postData.deleted).map(postData => (
       <Row key={ postData.id }>
         <Col md={12}>
           <Panel bsStyle="primary">
@@ -27,6 +34,7 @@ const ConnectedListPosts = ({ post }) => (
             </Panel.Heading>
             <Panel.Body>
               { postData.body }
+              <Button onClick={() => {removePost(postData.id)}}> Remover Post </Button>
             </Panel.Body>
             <Panel.Footer>
               <CommentPanel
@@ -42,6 +50,6 @@ const ConnectedListPosts = ({ post }) => (
   </div>
 );
 
-const ListPosts = connect(mapStateToProps)(ConnectedListPosts);
+const ListPosts = connect(mapStateToProps, mapDispatchToProps)(ConnectedListPosts);
 
 export default ListPosts;
