@@ -44,6 +44,9 @@ class AddPost extends Component{
   }
 
   render(){
+
+    const { categories } = this.props;
+
     return(
       <div>
         <Button bsStyle='primary' onClick={this.handleShow}>
@@ -58,11 +61,11 @@ class AddPost extends Component{
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={this.handleSubmit}>
-              <FormGroup controlId='idCategorie'>
+              <FormGroup controlId='category'>
                 <ControlLabel>Categoria:</ControlLabel>
-                <FormControl componentClass='select' name='idCategorie' id='idCategorie'>
-                  {this.props.categories.map(categorie => (
-                    <option key={categorie.id} value={categorie.id}>{categorie.name}</option>
+                <FormControl componentClass='select' name='category' id='category'>
+                  {categories.map(category => (
+                    <option key={category.path} value={category.path}>{category.name}</option>
                   ))}
                 </FormControl>
               </FormGroup>
