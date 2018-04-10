@@ -4,6 +4,11 @@ import AddComment from '../Modal/Comment/Add';
 import EditComment from '../Modal/Comment/Edit';
 import { connect } from 'react-redux';
 import { removeComment } from '../../actions';
+import * as CommentsApi from '../../util/CommentsApi';
+
+this.state = {
+  comments: []
+};
 
 const mapStateToProps = state => {
   return { comment: state.comment };
@@ -18,12 +23,12 @@ const mapDispatchToProps = dispatch => {
 class CommentPanel extends Component{
   render(){
 
-    const { postData, comment, idPost } = this.props
+    const { postData, comment, idPost } = this.state
 
     return(
       <div>
         <Panel.Heading>Comentarios</Panel.Heading>
-        { comment && comment.filter(c => !c.deleted && c.parentId === idPost).map(commentData => (
+        { comment && comment.filter(c => !c.deleted).map(commentData => (
           <Panel.Body key = { commentData.id }>
             <Panel bsStyle="primary">
               <Panel.Heading>{ commentData.author } - { commentData.timestamp }</Panel.Heading>
