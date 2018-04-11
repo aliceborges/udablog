@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import uuidv1 from 'uuid';
 import serializeForm from 'form-serialize';
 import { addComment } from '../../../actions';
+import * as CommentsApi from '../../../util/CommentsApi';
 
 const mapDispatchToProps = dispatch => {
   return{
@@ -37,8 +38,11 @@ class AddComment extends Component{
     const comment = serializeForm(e.target, { hash: true });
     comment.id = uuidv1();
     comment.parentId = this.state.idPost;
-    this.props.addComment(comment);
-    this.setState({ ...this.state, show: false });
+
+    CommentsApi.add(comment).then(() => {
+      this.props.addComment(comment);
+      this.setState({ ...this.state, show: false });
+    });
   }
 
   render(){
@@ -58,11 +62,11 @@ class AddComment extends Component{
             <Modal.Body>
               <FormGroup controlId='body'>
                 <ControlLabel>Comentario:</ControlLabel>
-                <FormControl id='body' type='text'/>
+                <FormControl id='body' name='body' type='text'/>
               </FormGroup>
               <FormGroup controlId='author'>
                 <ControlLabel>Autor:</ControlLabel>
-                <FormControl id='author' type='text'/>
+                <FormControl id='author' name='author' type='text'/>
               </FormGroup>
             </Modal.Body>
             <Modal.Footer>
