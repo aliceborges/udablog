@@ -36,11 +36,11 @@ class Post extends Component{
               post = {post}
             ></EditPost>
             <Panel.Footer>
-            {/*<CommentPanel
-                idPost = {post.id}
-                key = {post.id}
-              >
-              </CommentPanel>*/}
+              <CommentPanel
+                  idPost = {post.id}
+                  key = {post.id}
+                >
+              </CommentPanel>
             </Panel.Footer>
           </Panel>
         </Col>

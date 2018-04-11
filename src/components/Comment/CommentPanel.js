@@ -6,14 +6,6 @@ import { connect } from 'react-redux';
 import { removeComment } from '../../actions';
 import * as CommentsApi from '../../util/CommentsApi';
 
-this.state = {
-  comments: []
-};
-
-const mapStateToProps = state => {
-  return { comment: state.comment };
-};
-
 const mapDispatchToProps = dispatch => {
   return {
     removeComment: idComment => dispatch(removeComment(idComment))
@@ -21,14 +13,30 @@ const mapDispatchToProps = dispatch => {
 };
 
 class CommentPanel extends Component{
+
+  constructor (props, context){
+    super(props, context);
+
+    this.state = {
+      comments:[]
+    }
+  }
+
+  componentDidMount(){
+    CommentsApi.getAll(this.props.idPost).then((comments) => {
+      this.setState({...this.state, comments});
+    });
+  }
+
   render(){
 
-    const { postData, comment, idPost } = this.state
+    const { postData, comments } = this.state;
+    const { idPost, removeComment } = this.props;
 
     return(
       <div>
         <Panel.Heading>Comentarios</Panel.Heading>
-        { comment && comment.filter(c => !c.deleted).map(commentData => (
+        { comments && comments.filter(commentData => !commentData.deleted).map(commentData => (
           <Panel.Body key = { commentData.id }>
             <Panel bsStyle="primary">
               <Panel.Heading>{ commentData.author } - { commentData.timestamp }</Panel.Heading>
@@ -42,15 +50,15 @@ class CommentPanel extends Component{
               comment = { commentData }
             >
             </EditComment>
-            <Button onClick={() => {this.props.removeComment(commentData.id)}}> Remover Comentário </Button>
+            <Button onClick={() => {removeComment(commentData.id)}}> Remover Comentário </Button>
             </Panel.Body>
         ))}
         <Panel.Footer>
-          <AddComment idPost = { postData.id }></AddComment>
+          <AddComment idPost = { idPost }></AddComment>
         </Panel.Footer>
       </div>
-    );
-  };
-};
+    )
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentPanel);
+export default connect(null, mapDispatchToProps)(CommentPanel);
