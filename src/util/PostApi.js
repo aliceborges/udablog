@@ -9,7 +9,7 @@ export const getAll = () =>
   fetch(api, {headers})
   .then(res=>res.json());
 
-export const addPost = (post) =>
+export const add = (post) =>
   fetch(api, {
     method: 'POST',
     headers: {

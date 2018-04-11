@@ -40,8 +40,12 @@ class AddPost extends Component{
     e.preventDefault()
     const post = serializeForm(e.target, {hash:true});
     post.id = uuidv1();
-    this.props.addPost(post);
-    this.setState({show:false});
+    post.timestamp = Date.now();
+
+    PostApi.add(post).then((res) => {
+      this.props.addPost(res);
+      this.setState({show: false});
+    });
   }
 
   render(){
@@ -60,8 +64,8 @@ class AddPost extends Component{
               Adicionar Post
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
             <form onSubmit={this.handleSubmit}>
+            <Modal.Body>
               <FormGroup controlId='category'>
                 <ControlLabel>Categoria:</ControlLabel>
                 <FormControl componentClass='select' name='category' id='category'>
@@ -72,22 +76,22 @@ class AddPost extends Component{
               </FormGroup>
               <FormGroup controlId='title'>
                 <ControlLabel>Titulo:</ControlLabel>
-                <FormControl id='title' type='text'/>
+                <FormControl id='title' name='title' type='text'/>
               </FormGroup>
               <FormGroup controlId='body'>
                 <ControlLabel>Conteudo:</ControlLabel>
-                <FormControl id='body' type='text'/>
+                <FormControl id='body' name='body' type='text'/>
               </FormGroup>
               <FormGroup controlId='author'>
                 <ControlLabel>Autor:</ControlLabel>
-                <FormControl id='author' type='text'/>
+                <FormControl id='author' name='author' type='text'/>
               </FormGroup>
-            </form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.handleClose}>Fechar</Button>
-            <Button bsStyle='primary'>Cadastrar</Button>
-          </Modal.Footer>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button onClick={this.handleClose}>Fechar</Button>
+              <Button type='submit' bsStyle='primary'>Cadastrar</Button>
+            </Modal.Footer>
+          </form>
         </Modal>
       </div>
     );
