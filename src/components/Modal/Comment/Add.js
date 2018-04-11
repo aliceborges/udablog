@@ -39,8 +39,8 @@ class AddComment extends Component{
     comment.id = uuidv1();
     comment.parentId = this.state.idPost;
 
-    CommentsApi.add(comment).then(() => {
-      this.props.addComment(comment);
+    CommentsApi.add(comment).then((com) => {
+      this.props.addComment(com);
       this.setState({ ...this.state, show: false });
     });
   }

@@ -37,8 +37,8 @@ class EditComment extends Component{
     const comment = serializeForm(e.target, { hash: true });
     comment.id = this.props.commentId;
     comment.parentId = this.props.idPost;
-    CommentsApi.edit(comment).then(() => {
-      this.props.editComment(comment);
+    CommentsApi.edit(comment).then((com) => {
+      this.props.editComment(com);
       this.setState({ ...this.state, show: false });
     });
   }
