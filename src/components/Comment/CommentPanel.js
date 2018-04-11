@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Panel, Button } from 'react-bootstrap';
+import { Panel, Button } from 'react-bootstrap';
 import AddComment from '../Modal/Comment/Add';
 import EditComment from '../Modal/Comment/Edit';
 import { connect } from 'react-redux';
@@ -30,7 +30,7 @@ class CommentPanel extends Component{
 
   render(){
 
-    const { postData, comments } = this.state;
+    const { comments } = this.state;
     const { idPost, removeComment } = this.props;
 
     return(
@@ -42,15 +42,15 @@ class CommentPanel extends Component{
               <Panel.Heading>{ commentData.author } - { Date(commentData.timestamp) }</Panel.Heading>
               <Panel.Body>
                 <p> { commentData.body } </p>
+                <EditComment
+                  key = { commentData.id }
+                  commentId = { commentData.id }
+                  comment = { commentData }
+                >
+                </EditComment>
+                <Button onClick={() => {removeComment(commentData.id)}}> Remover Comentario </Button>
               </Panel.Body>
             </Panel>
-            <EditComment
-              key = { commentData.id }
-              commentId = { commentData.id }
-              comment = { commentData }
-            >
-            </EditComment>
-            <Button onClick={() => {removeComment(commentData.id)}}> Remover Comentario </Button>
             </Panel.Body>
         ))}
         <Panel.Footer>

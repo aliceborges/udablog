@@ -39,7 +39,7 @@ class App extends Component {
         <Navbar class="navbar navbar-default">
           <div class="container-fluid">
             <div class="navbar-header">
-              <a class="navbar-brand" href="#">Udablog - Blog da Udacity</a>
+              <a class="navbar-brand" href="/">Udablog - Blog da Udacity</a>
             </div>
           </div>
         </Navbar>

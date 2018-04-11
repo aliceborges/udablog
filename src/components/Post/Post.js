@@ -29,12 +29,12 @@ class Post extends Component{
               >
                 Remover Post
               </Button>
+              <EditPost
+                key = {post.id}
+                idPost = {post.id}
+                post = {post}
+              ></EditPost>
             </Panel.Body>
-            <EditPost
-              key = {post.id}
-              idPost = {post.id}
-              post = {post}
-            ></EditPost>
             <Panel.Footer>
               <CommentPanel
                   idPost = {post.id}

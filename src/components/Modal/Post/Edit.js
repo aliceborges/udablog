@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import serializeForm from 'form-serialize';
 import { editPost } from '../../../actions';
-import uuidv1 from 'uuid';
 import {Modal, Button, FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap';
 import * as PostApi from '../../../util/PostApi';
 

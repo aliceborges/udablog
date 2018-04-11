@@ -1,9 +1,8 @@
 import React from 'react';
-import { Row, Col, Panel, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import AddPost from '../Modal/Post/Add';
 import { connect } from 'react-redux';
 import { removePost } from '../../actions';
-import * as PostApi from '../../util/PostApi';
 import Post from './Post';
 
 const mapStateToProps = state => {
