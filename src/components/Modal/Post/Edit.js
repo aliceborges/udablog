@@ -4,6 +4,7 @@ import serializeForm from 'form-serialize';
 import { editPost } from '../../../actions';
 import uuidv1 from 'uuid';
 import {Modal, Button, FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap';
+import * as PostApi from '../../../util/PostApi';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -38,9 +39,11 @@ class EditPost extends Component{
   handleSubmit = (e) => {
     e.preventDefault()
     const post = serializeForm(e.target, {hash:true});
-    post.id = uuidv1();
-    this.props.addPost(post);
-    this.setState({show:false});
+
+    PostApi.edit(this.props.idPost, post).then((res)=>{
+      this.props.editPost(res);
+      this.setState({show:false});
+    });
   }
 
   render(){
@@ -59,8 +62,8 @@ class EditPost extends Component{
               Editar Post
             </Modal.Title>
           </Modal.Header>
+          <form onSubmit={this.handleSubmit}>
           <Modal.Body>
-            <form onSubmit={this.handleSubmit}>
               <FormGroup controlId='category'>
                 <ControlLabel>Categoria:</ControlLabel>
                 <FormControl componentClass='select' name='category' id='category'>
@@ -71,22 +74,22 @@ class EditPost extends Component{
               </FormGroup>
               <FormGroup controlId='title'>
                 <ControlLabel>Titulo:</ControlLabel>
-                <FormControl id='title' type='text' defaultValue={ post.title }/>
+                <FormControl name='title' id='title' type='text' defaultValue={ post.title }/>
               </FormGroup>
               <FormGroup controlId='body'>
                 <ControlLabel>Conteudo:</ControlLabel>
-                <FormControl id='body' type='text' defaultValue={ post.body }/>
+                <FormControl name='body' id='body' type='text' defaultValue={ post.body }/>
               </FormGroup>
               <FormGroup controlId='author'>
                 <ControlLabel>Autor:</ControlLabel>
-                <FormControl id='author' type='text' defaultValue={ post.author }/>
+                <FormControl name='author' id='author' type='text' defaultValue={ post.author }/>
               </FormGroup>
-            </form>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Fechar</Button>
-            <Button bsStyle='primary'>Cadastrar</Button>
+            <Button bsStyle='primary' type='submit'>Cadastrar</Button>
           </Modal.Footer>
+          </form>
         </Modal>
       </div>
     );

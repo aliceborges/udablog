@@ -16,12 +16,15 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+
   switch(action.type){
+
     case ADD_POST:
       return{
         ...state,
         post: [...state.post, action.post]
       };
+
     case EDIT_POST:
       const updatePost = state.post.map(item=>{
         if(item.id === action.post.id){
@@ -32,6 +35,7 @@ const reducer = (state = initialState, action) => {
         }
       });
       return {...state, post: updatePost};
+
     case REMOVE_POST:
       const deletePost = state.post.map(item => {
         if(item.id === action.idPost){
@@ -41,6 +45,9 @@ const reducer = (state = initialState, action) => {
           return item;
         }
       });
+
+      return {...state, post: deletePost};
+
     case ADD_COMMENT:
       const index = searchId(state.post, action.comment.parentId);
       const post = state.post[index];
@@ -55,6 +62,7 @@ const reducer = (state = initialState, action) => {
       state.post[index] = post;
 
       return state;
+
     case EDIT_COMMENT:
       const updateComment = state.comment.map(item => {
         if (item.id === action.comment.id){
@@ -65,6 +73,7 @@ const reducer = (state = initialState, action) => {
         }
       });
       return { ...state, comment:updateComment };
+
     case REMOVE_COMMENT:
       const deleteComment = state.comment.map(item=>{
         if (item.id === action.idComment){
@@ -75,6 +84,7 @@ const reducer = (state = initialState, action) => {
         }
       });
       return {...state, comment: deleteComment };
+
     case ADD_CATEGORY:
       return {...state, categories: [...state.categories, action.category]};
     default:
