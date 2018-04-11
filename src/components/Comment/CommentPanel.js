@@ -39,7 +39,7 @@ class CommentPanel extends Component{
         { comments && comments.filter(commentData => !commentData.deleted).map(commentData => (
           <Panel.Body key = { commentData.id }>
             <Panel bsStyle="primary">
-              <Panel.Heading>{ commentData.author } - { commentData.timestamp }</Panel.Heading>
+              <Panel.Heading>{ commentData.author } - { Date(commentData.timestamp) }</Panel.Heading>
               <Panel.Body>
                 <p> { commentData.body } </p>
               </Panel.Body>
@@ -50,7 +50,7 @@ class CommentPanel extends Component{
               comment = { commentData }
             >
             </EditComment>
-            <Button onClick={() => {removeComment(commentData.id)}}> Remover Comentário </Button>
+            <Button onClick={() => {removeComment(commentData.id)}}> Remover Comentario </Button>
             </Panel.Body>
         ))}
         <Panel.Footer>
