@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Modal, Button, FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap';
 import { connect } from 'react-redux';
-import uuidv1 from 'uuid';
 import serializeForm from 'form-serialize';
 import { editComment } from '../../../actions';
+import * as CommentsApi from '../../../util/CommentsApi';
 
 const mapDispatchToProps = dispatch => {
   return{
@@ -35,10 +35,12 @@ class EditComment extends Component{
   handleSubmit = (e) => {
     e.preventDefault()
     const comment = serializeForm(e.target, { hash: true });
-    comment.id = uuidv1();
-    comment.parentId = this.state.idPost;
-    this.props.editComment(comment);
-    this.setState({ ...this.state, show: false });
+    comment.id = this.props.commentId;
+    comment.parentId = this.props.idPost;
+    CommentsApi.edit(comment).then(() => {
+      this.props.editComment(comment);
+      this.setState({ ...this.state, show: false });
+    });
   }
 
   render(){
@@ -61,16 +63,16 @@ class EditComment extends Component{
             <Modal.Body>
               <FormGroup controlId='body'>
                 <ControlLabel>Comentario:</ControlLabel>
-                <FormControl id='body' type='text' defaultValue = { comment.body }/>
+                <FormControl id='body' type='text' name='body' defaultValue = { comment.body }/>
               </FormGroup>
               <FormGroup controlId='author'>
                 <ControlLabel>Autor:</ControlLabel>
-                <FormControl id='author' type='text' defaultValue = { comment.author }/>
+                <FormControl id='author' type='text' name='author' defaultValue = { comment.author }/>
               </FormGroup>
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.handleClose}>Fechar</Button>
-              <Button bsStyle='primary' type='submit'>Comentar</Button>
+              <Button bsStyle='primary' type='submit'>Editar</Button>
             </Modal.Footer>
           </form>
         </Modal>

@@ -46,6 +46,7 @@ class CommentPanel extends Component{
                   key = { commentData.id }
                   commentId = { commentData.id }
                   comment = { commentData }
+                  idPost = { idPost }
                 >
                 </EditComment>
                 <Button onClick={() => {removeComment(commentData.id)}}> Remover Comentario </Button>

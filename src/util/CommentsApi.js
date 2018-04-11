@@ -18,8 +18,8 @@ fetch(apiComment,{
 	body: JSON.stringify(comment)
 }).then(res => res.json());
 
-export const edit = (id, comment) =>
-fetch(apiComment +'/'+ id, {
+export const edit = (comment) =>
+fetch(apiComment +'/'+ comment.id, {
 	method: 'PUT',
 	headers: {
 	  ...headers,
