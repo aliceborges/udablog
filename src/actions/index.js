@@ -12,8 +12,8 @@ export const addPost = post => ({ type: ADD_POST, post});
 export const editPost = post => ({ type: EDIT_POST, post});
 export const removePost = idPost => ({ type: REMOVE_POST, idPost});
 
-export const addComment = comment => ({ type: ADD_COMMENT, comment });
-export const editComment = comment => ({ type: EDIT_COMMENT, comment });
+export const addComment = comment => ({ type: ADD_COMMENT, comment});
+export const editComment = comment => ({ type: EDIT_COMMENT, comment});
 export const removeComment = idComment => ({ type: REMOVE_COMMENT, idComment});
 
 export const addCategory = category => ({ type: ADD_CATEGORY, category});

@@ -34,3 +34,13 @@ export const remove = (id) =>
     method: 'DELETE',
     headers
   }).then(res => res.json());
+
+export const vote = (id, option) =>
+fetch(api + '/' + id, {
+  method: 'POST',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json'
+  },
+  body:JSON.stringify({option})
+}).then(res=> res.json());

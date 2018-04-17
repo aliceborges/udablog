@@ -1,15 +1,6 @@
 import React, {Component} from 'react';
 import {Modal, Button, FormGroup, ControlLabel, FormControl, Glyphicon} from 'react-bootstrap';
-import { connect } from 'react-redux';
 import serializeForm from 'form-serialize';
-import { editComment } from '../../../actions';
-import * as CommentsApi from '../../../util/CommentsApi';
-
-const mapDispatchToProps = dispatch => {
-  return{
-    editComment: comment => dispatch(editComment(comment))
-  };
-};
 
 class EditComment extends Component{
   constructor(props, context){
@@ -37,10 +28,8 @@ class EditComment extends Component{
     const comment = serializeForm(e.target, { hash: true });
     comment.id = this.props.commentId;
     comment.parentId = this.props.idPost;
-    CommentsApi.edit(comment).then((com) => {
-      this.props.editComment(com);
-      this.setState({ ...this.state, show: false });
-    });
+    this.props.eddited(comment);
+    this.handleClose();
   }
 
   render(){
@@ -81,4 +70,4 @@ class EditComment extends Component{
   }
 }
 
-export default connect (null, mapDispatchToProps)(EditComment);
+export default EditComment;

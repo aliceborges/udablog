@@ -5,7 +5,28 @@ import CommentPanel from '../Comment/CommentPanel';
 import { removePost } from '../../actions';
 import * as PostApi from '../../util/PostApi';
 
+const addVote = 'addVote';
+const removeVote = 'removeVote';
+
 class Post extends Component{
+
+  state = {
+    option: addVote
+  }
+
+  vote = (idComment) => {
+    if (this.state.option === addVote){
+      PostApi.vote(idComment, removeVote).then(() => {
+        this.setState({option:removeVote});
+      });
+    }
+    else{
+      PostApi.vote(idComment, addVote).then(() => {
+        this.setState({option:addVote});
+      });
+    };
+  };
+
   render(){
 
     const { post } = this.props;
@@ -36,6 +57,7 @@ class Post extends Component{
               ></EditPost>
             </Panel.Body>
             <Panel.Footer>
+            <Button onClick={() => { this.vote(post.id); }}>{this.state.option === addVote ? 'Curtir' : 'Descurtir'}</Button>
               <CommentPanel
                   idPost = {post.id}
                   key = {post.id}
