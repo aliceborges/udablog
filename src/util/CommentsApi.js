@@ -43,3 +43,13 @@ fetch(apiComment +'/'+ id,{
 	},
 	body: JSON.stringify({ option })
 }).then(res => res.json());
+
+export const vote = (id, option) =>
+fetch(apiComment + '/' + id, {
+  method: 'POST',
+  headers: {
+    ...headers,
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({option})
+}).then(res=> res.json());

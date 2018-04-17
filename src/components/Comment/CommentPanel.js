@@ -4,6 +4,7 @@ import AddComment from '../Modal/Comment/Add';
 import EditComment from '../Modal/Comment/Edit';
 import { connect } from 'react-redux';
 import { removeComment, addComment, editComment } from '../../actions';
+import Comment from './Comment';
 import * as CommentsApi from '../../util/CommentsApi';
 import uuidv1 from 'uuid';
 import serializeForm from 'form-serialize';
@@ -73,23 +74,10 @@ class CommentPanel extends Component{
       <div>
         <Panel.Heading>Comentarios</Panel.Heading>
         { comments && comments.filter(commentData => !commentData.deleted).map(commentData => (
-          <Panel.Body key = { commentData.id }>
-            <Panel bsStyle="primary">
-              <Panel.Heading>{ commentData.author } - { Date(commentData.timestamp) }</Panel.Heading>
-              <Panel.Body>
-                <p> { commentData.body } </p>
-                <EditComment
-                  key = { commentData.id }
-                  commentId = { commentData.id }
-                  comment = { commentData }
-                  idPost = { idPost }
-                  eddited = {this.eddited}
-                >
-                </EditComment>
-                <Button onClick={ this.remove }> Remover Comentario </Button>
-              </Panel.Body>
-            </Panel>
-            </Panel.Body>
+          <Comment
+            key = { commentData.id }
+            commentData = { commentData }
+          ></Comment>
         ))}
         <Panel.Footer>
           <AddComment
