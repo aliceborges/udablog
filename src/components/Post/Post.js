@@ -38,6 +38,7 @@ class Post extends Component{
             <Panel.Heading>
               <Panel.Title>{ post.title }</Panel.Title>
               <h6> { post.author } - { Date(post.timestamp) }</h6>
+              <h6> Score: { post.voteScore } </h6>
             </Panel.Heading>
             <Panel.Body>
               { post.body }
