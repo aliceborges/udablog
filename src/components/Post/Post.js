@@ -4,9 +4,19 @@ import EditPost from '../Modal/Post/Edit';
 import CommentPanel from '../Comment/CommentPanel';
 import { removePost } from '../../actions';
 import * as PostApi from '../../util/PostApi';
+import { connect } from 'react-redux';
 
 const addVote = 'addVote';
 const removeVote = 'removeVote';
+
+const mapDispatchToProps = dispatch => {
+  return {
+    removePost: idPost => (
+      dispatch(removePost(idPost)),
+      PostApi.remove(idPost)
+    )
+  }
+};
 
 class Post extends Component{
 
@@ -44,9 +54,7 @@ class Post extends Component{
               { post.body }
               <Button
                 onClick={() => {
-                  PostApi.remove(post.id).then(()=>{
-                    removePost(post.id);
-                  });
+                  this.props.removePost(post.id)
                 }}
               >
                 Remover Post
@@ -72,4 +80,4 @@ class Post extends Component{
   }
 }
 
-export default Post;
+export default connect (null, mapDispatchToProps)(Post);
