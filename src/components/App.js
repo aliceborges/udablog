@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Navbar, Grid } from 'react-bootstrap';
 import ListPosts from './Post/List';
+import Post from './Post/Post';
 import { connect } from 'react-redux';
 import * as CategoriesApi from '../util/CategoriesApi';
 import * as PostApi from '../util/PostApi';
 import { addCategory, addPost } from '../actions';
-
+import { Route } from 'react-router-dom';
 import '../styles/css/bootstrap.min.css';
 
 const mapDispatchToProps = dispatch => {
@@ -44,7 +45,8 @@ class App extends Component {
           </div>
         </Navbar>
         <Grid>
-          <ListPosts></ListPosts>
+          <Route exact path="/" component={ListPosts}/>
+          <Route exact path="/post/:id" component={Post}/>
         </Grid>
       </div>
     );
