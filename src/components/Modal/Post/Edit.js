@@ -86,7 +86,7 @@ class EditPost extends Component{
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Fechar</Button>
-            <Button bsStyle='primary' type='submit'>Cadastrar</Button>
+            <Button bsStyle='primary' type='submit'>Editar</Button>
           </Modal.Footer>
           </form>
         </Modal>
