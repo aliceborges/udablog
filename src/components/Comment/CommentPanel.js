@@ -29,7 +29,8 @@ class CommentPanel extends Component{
     super(props, context);
 
     this.state = {
-      comments:[]
+      comments:[],
+      qtdComments: this.props.qtdComments
     }
   }
 
@@ -42,6 +43,7 @@ class CommentPanel extends Component{
   added = (comment) => {
     CommentsApi.add(comment).then((res) => {
       this.setState({ ...this.state, comments: [ ...this.state.comments, res ] });
+      this.setState({qtdComments: this.state.qtdComments + 1})
     });
   }
 
@@ -62,17 +64,19 @@ class CommentPanel extends Component{
         }
       });
       this.setState({...this.state, comments:[ deleteComment ]});
+      this.setState({qtdComments: this.state.qtdComments - 1});
     });
   };
 
   render(){
 
-    const { comments } = this.state;
+    const { comments, qtdComments } = this.state;
     const { idPost, removeComment } = this.props;
 
     return(
       <div>
         <Panel.Heading>Comentarios</Panel.Heading>
+        <h6>Quantidade de comentários: { qtdComments }</h6>
         { comments && comments.filter(commentData => !commentData.deleted).map(commentData => (
           <Comment
             key = { commentData.id }

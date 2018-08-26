@@ -84,6 +84,7 @@ class Post extends Component{
               <CommentPanel
                   idPost = {post.id}
                   key = {post.id}
+                  qtdComments = { post.commentCount }
                 >
               </CommentPanel>
             </Panel.Footer>
