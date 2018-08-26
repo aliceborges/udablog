@@ -26,26 +26,26 @@ class Post extends Component{
     votes: this.props.votes
   }
 
-  onVote(vote){
-    if (vote <= 0){
-      document.getElementById('descurtir').disabled = true;
-    }
-    else{
-      document.getElementById('descurtir').disabled = false;
-    }
-  }
+  // onVote(vote){
+  //   if (vote <= 0){
+  //     document.getElementById('descurtir').disabled = true;
+  //   }
+  //   else{
+  //     document.getElementById('descurtir').disabled = false;
+  //   }
+  // }
 
   addPostVote = (idComment) => {
     PostApi.vote(idComment, UP_VOTE).then(() => {
         this.setState({votes: this.state.votes + 1});
-        this.onVote(this.state.votes);
+        //this.onVote(this.state.votes);
     });
   };
 
   removePostVote = (idComment) => {
     PostApi.vote(idComment, DOWN_VOTE).then(() => {
       this.setState({ votes: this.state.votes -1});
-      this.onVote(this.state.votes);
+      //this.onVote(this.state.votes);
     });
   }
 
