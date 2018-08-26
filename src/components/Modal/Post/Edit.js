@@ -67,7 +67,11 @@ class EditPost extends Component{
                 <ControlLabel>Categoria:</ControlLabel>
                 <FormControl componentClass='select' name='category' id='category'>
                   {categories.map(category => (
-                    <option key={category.path} value={category.path}>{category.name}</option>
+                    <option
+                      key={category.path}
+                      value={category.path}
+                      selected={ post.category == category.path }
+                    >{category.name}</option>
                   ))}
                 </FormControl>
               </FormGroup>
