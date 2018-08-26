@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 
 const addVote = 'addVote';
 const removeVote = 'removeVote';
+const UP_VOTE = 'upVote';
+const DOWN_VOTE = 'downVote';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -21,25 +23,36 @@ const mapDispatchToProps = dispatch => {
 class Post extends Component{
 
   state = {
-    option: addVote
+    votes: this.props.votes
   }
 
-  vote = (idComment) => {
-    if (this.state.option === addVote){
-      PostApi.vote(idComment, removeVote).then(() => {
-        this.setState({option:removeVote});
-      });
+  onVote(vote){
+    if (vote <= 0){
+      document.getElementById('descurtir').disabled = true;
     }
     else{
-      PostApi.vote(idComment, addVote).then(() => {
-        this.setState({option:addVote});
-      });
-    };
+      document.getElementById('descurtir').disabled = false;
+    }
+  }
+
+  addPostVote = (idComment) => {
+    PostApi.vote(idComment, UP_VOTE).then(() => {
+        this.setState({votes: this.state.votes + 1});
+        this.onVote(this.state.votes);
+    });
   };
+
+  removePostVote = (idComment) => {
+    PostApi.vote(idComment, DOWN_VOTE).then(() => {
+      this.setState({ votes: this.state.votes -1});
+      this.onVote(this.state.votes);
+    });
+  }
 
   render(){
 
     const { post } = this.props;
+    const { votes } = this.state;
 
     return(
       <Row key={ post.id }>
@@ -48,7 +61,7 @@ class Post extends Component{
             <Panel.Heading>
               <Panel.Title>{ post.title }</Panel.Title>
               <h6> { post.author } - { Date(post.timestamp) }</h6>
-              <h6> Score: { post.voteScore } </h6>
+              <h6> Score: { votes } </h6>
             </Panel.Heading>
             <Panel.Body>
               { post.body }
@@ -66,7 +79,8 @@ class Post extends Component{
               ></EditPost>
             </Panel.Body>
             <Panel.Footer>
-            <Button onClick={() => { this.vote(post.id); }}>{this.state.option === addVote ? 'Curtir' : 'Descurtir'}</Button>
+            <Button onClick={() => { this.addPostVote(post.id); }}>Curtir</Button>
+            <Button id='descurtir' onClick={() => { this.removePostVote(post.id); }}>Descurtir</Button>
               <CommentPanel
                   idPost = {post.id}
                   key = {post.id}

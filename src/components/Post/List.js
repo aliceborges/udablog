@@ -33,6 +33,7 @@ const ConnectedListPosts = ({ post, categories, removePost }) => (
           <Post
             key = {postData}
             post = {postData}
+            votes = { postData.voteScore }
           ></Post>
         ))}
       </div>
