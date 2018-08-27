@@ -17,6 +17,7 @@ class Comment extends Component{
     super(props, context);
 
     this.state = {
+      commentData: this.props.commentData,
       option: addVote
     }
   }
@@ -34,10 +35,14 @@ class Comment extends Component{
     };
   };
 
+  edditedComment = (comment) => {
+    this.setState({ commentData : comment });
+  };
+
   render(){
 
-    const { comments } = this.state;
-    const { idPost, removeComment, commentData } = this.props;
+    const { comments, commentData } = this.state;
+    const { idPost, removeComment, eddited } = this.props;
 
     return(
       <div>
@@ -52,7 +57,7 @@ class Comment extends Component{
                   commentId = { commentData.id }
                   comment = { commentData }
                   idPost = { idPost }
-                  eddited = {this.eddited}
+                  edditedComment = { this.edditedComment }
                 >
                 </EditComment>
                 <Button onClick={ this.remove }> Remover Comentario </Button>

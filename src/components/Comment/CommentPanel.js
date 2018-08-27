@@ -47,12 +47,6 @@ class CommentPanel extends Component{
     });
   }
 
-  eddited = (comment) => {
-    CommentsApi.edit(comment).then((res) => {
-      this.setState({ ...this.state, comments: [ ...this.state.comments, res ] });
-    });
-  }
-
   remove = (idComment) => {
     CommentsApi.remove(idComment).then((res) => {
       const deleteComment = this.state.comments.map(item => {
@@ -71,7 +65,7 @@ class CommentPanel extends Component{
   render(){
 
     const { comments, qtdComments } = this.state;
-    const { idPost, removeComment } = this.props;
+    const { idPost, removeComment, eddited } = this.props;
 
     return(
       <div>
