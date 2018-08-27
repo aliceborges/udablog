@@ -37,10 +37,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="/">Udablog - Blog da Udacity</a>
+        <Navbar className="navbar navbar-default">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <a className="navbar-brand" href="/">Udablog - Blog da Udacity</a>
             </div>
           </div>
         </Navbar>
