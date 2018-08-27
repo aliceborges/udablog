@@ -9,6 +9,10 @@ export const getAll = () =>
   fetch(api, {headers})
   .then(res=>res.json());
 
+export const get = (id) =>
+  fetch(api+'/'+id, { headers })
+  .then(res => res.json());
+
 export const add = (post) =>
   fetch(api, {
     method: 'POST',

@@ -38,12 +38,12 @@ class Post extends Component{
 	}
 
   componentDidMount(){
-      this.setState({ post: this.props.post });
+     this.refresh(this.props.match.params.id);
 	}
 
   refresh = (id) => {
 		PostApi.get(id).then((postData) => {
-			this.setState({ postData });
+			this.setState({ post: postData });
 		});
 	};
 
