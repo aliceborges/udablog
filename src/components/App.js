@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Navbar, Grid } from 'react-bootstrap';
 import ListPosts from './Post/List';
-import Post from './Post/PostID';
+import PostID from './Post/PostID';
+import Category from './Category/Category';
 import { connect } from 'react-redux';
 import * as CategoriesApi from '../util/CategoriesApi';
 import * as PostApi from '../util/PostApi';
@@ -46,7 +47,8 @@ class App extends Component {
         </Navbar>
         <Grid>
           <Route exact path="/" component={ListPosts}/>
-          <Route path="/:category/:id" component={Post}/>
+          <Route path="/:category/:post_id" component={PostID}/>
+          <Route path="/:category" component={Category}/>
         </Grid>
       </div>
     );

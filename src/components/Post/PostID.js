@@ -38,7 +38,7 @@ class Post extends Component{
 	}
 
   componentDidMount(){
-     this.refresh(this.props.match.params.category, this.props.match.params.id);
+     this.refresh(this.props.match.params.category, this.props.match.params.post_id);
 	}
 
   refresh = (category, id) => {

@@ -1,4 +1,5 @@
 const api = 'http://localhost:3001/posts';
+const apiNull = 'http://localhost:3001';
 
 const headers = {
   'Accept': 'application/json',
@@ -11,6 +12,10 @@ export const getAll = () =>
 
 export const get = (id) =>
   fetch(api+'/'+id, { headers })
+  .then(res => res.json());
+
+export const getByCategory = (category) =>
+  fetch(apiNull+'/'+category+'/posts', { headers })
   .then(res => res.json());
 
 export const add = (post) =>
