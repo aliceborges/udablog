@@ -55,7 +55,7 @@ class Comment extends Component{
   render(){
 
     const { comments, commentData } = this.state;
-    const { idPost, eddited, onRemove } = this.props;
+    const { idPost, eddited } = this.props;
 
     return(
       <div>
