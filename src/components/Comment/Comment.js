@@ -3,13 +3,19 @@ import { Panel, Button } from 'react-bootstrap';
 import AddComment from '../Modal/Comment/Add';
 import EditComment from '../Modal/Comment/Edit';
 import { connect } from 'react-redux';
-import { removeComment, addComment, editComment } from '../../actions';
 import * as CommentsApi from '../../util/CommentsApi';
 import uuidv1 from 'uuid';
 import serializeForm from 'form-serialize';
+import { removeComment } from '../../actions';
 
 const addVote = 'addVote';
 const removeVote = 'removeVote';
+
+const mapDispatchToProps = dispatch => {
+  return {
+    removeComment: idComment => dispatch(removeComment(idComment))
+  };
+};
 
 class Comment extends Component{
 
@@ -39,10 +45,17 @@ class Comment extends Component{
     this.setState({ commentData : comment });
   };
 
+  remove = (idComment) => {
+    CommentsApi.remove(idComment).then((res) => {
+      this.props.removeComment(idComment);
+      this.props.remove(idComment);
+    });
+  };
+
   render(){
 
     const { comments, commentData } = this.state;
-    const { idPost, removeComment, eddited } = this.props;
+    const { idPost, eddited, onRemove } = this.props;
 
     return(
       <div>
@@ -60,7 +73,11 @@ class Comment extends Component{
                   edditedComment = { this.edditedComment }
                 >
                 </EditComment>
-                <Button onClick={ this.remove }> Remover Comentario </Button>
+                <Button
+                  onClick={() => {
+                    this.remove(commentData.id)
+                  }}
+                > Remover Comentario </Button>
               </Panel.Body>
             </Panel>
             </Panel.Body>
@@ -69,4 +86,4 @@ class Comment extends Component{
   }
 }
 
-export default Comment;
+export default connect (null, mapDispatchToProps)(Comment);

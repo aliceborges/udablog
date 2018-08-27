@@ -3,7 +3,7 @@ import { Panel, Button } from 'react-bootstrap';
 import AddComment from '../Modal/Comment/Add';
 import EditComment from '../Modal/Comment/Edit';
 import { connect } from 'react-redux';
-import { removeComment, addComment, editComment } from '../../actions';
+import { addComment } from '../../actions';
 import Comment from './Comment';
 import * as CommentsApi from '../../util/CommentsApi';
 import uuidv1 from 'uuid';
@@ -12,16 +12,9 @@ import serializeForm from 'form-serialize';
 const mapStateToProps = (state, dispatch) => {
   return {
     addComment: comment => dispatch(addComment(comment)),
-    editComment: comment => dispatch(editComment(comment)),
     comment: state.comment
  };
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    removeComment: idComment => dispatch(removeComment(idComment))
-  };
-};
 
 class CommentPanel extends Component{
 
@@ -48,7 +41,6 @@ class CommentPanel extends Component{
   }
 
   remove = (idComment) => {
-    CommentsApi.remove(idComment).then((res) => {
       const deleteComment = this.state.comments.map(item => {
         if (item.id === idComment){
           return {...item, deleted:true};
@@ -57,9 +49,8 @@ class CommentPanel extends Component{
           return item;
         }
       });
-      this.setState({...this.state, comments:[ deleteComment ]});
+      this.setState({ ...this.state, comments: deleteComment });
       this.setState({qtdComments: this.state.qtdComments - 1});
-    });
   };
 
   render(){
@@ -75,6 +66,7 @@ class CommentPanel extends Component{
           <Comment
             key = { commentData.id }
             commentData = { commentData }
+            remove = { this.remove }
           ></Comment>
         ))}
         <Panel.Footer>
@@ -88,4 +80,4 @@ class CommentPanel extends Component{
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CommentPanel);
+export default connect(mapStateToProps, null)(CommentPanel);
