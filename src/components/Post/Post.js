@@ -61,6 +61,10 @@ class Post extends Component{
     });
   }
 
+  edditedPost = (postData) =>{
+    this.setState({post: postData});
+  }
+
   render(){
 
     const { votes, post } = this.state;
@@ -89,6 +93,7 @@ class Post extends Component{
                 key = {post.id}
                 idPost = {post.id}
                 post = {post}
+                edditedPost = { this.edditedPost }
               ></EditPost>
             </Panel.Body>
             <Panel.Footer>

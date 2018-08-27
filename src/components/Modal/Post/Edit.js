@@ -41,6 +41,7 @@ class EditPost extends Component{
 
     PostApi.edit(this.props.idPost, post).then((res)=>{
       this.props.editPost(res);
+      this.props.edditedPost(res);
       this.setState({show:false});
     });
   }
