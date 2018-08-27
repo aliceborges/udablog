@@ -71,6 +71,7 @@ class Post extends Component{
           <Panel bsStyle="primary">
             <Panel.Heading>
               <Panel.Title>{ post.title}</Panel.Title>
+              <a href= {'/' + post.category + '/' + post.id}>Ir ao site.</a>
               <h6> { post.author } - { Date(post.timestamp) }</h6>
               <h6> Score: { post.voteScore } </h6>
               <h6> ID: { post.id } </h6>

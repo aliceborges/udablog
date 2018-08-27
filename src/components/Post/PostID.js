@@ -38,13 +38,15 @@ class Post extends Component{
 	}
 
   componentDidMount(){
-     this.refresh(this.props.match.params.id);
+     this.refresh(this.props.match.params.category, this.props.match.params.id);
 	}
 
-  refresh = (id) => {
+  refresh = (category, id) => {
 		PostApi.get(id).then((postData) => {
-			this.setState({ post: postData });
-		});
+      if (postData.category == category){
+			  this.setState({ post: postData });
+      }
+    });
 	};
 
   addPostVote = (idComment) => {
@@ -67,6 +69,7 @@ class Post extends Component{
 
     return(
       <Row key={ post.id }>
+      {post.id && !post.deleted ?
         <Col md={12}>
           <Panel bsStyle="primary">
             <Panel.Heading>
@@ -102,6 +105,7 @@ class Post extends Component{
             </Panel.Footer>
           </Panel>
         </Col>
+        :<h1>404 - O post não foi encontrado.</h1>}
       </Row>
     )
   }
