@@ -32,7 +32,7 @@ const ConnectedListPosts = ({ post, categories, removePost }) => (
         <h6><a href={'/' + category.name}>Ir ao site da categoria.</a></h6>
         {post.filter(postData => !postData.deleted && postData.category === category.path).map(postData => (
           <Post
-            key = {postData}
+            key = {postData.id}
             post = {postData}
             idPost = {postData.id}
             votes = { postData.voteScore }

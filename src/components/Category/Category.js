@@ -42,7 +42,7 @@ class Category extends Component{
           <div key = { postData.category }>
             <h2>{ category }</h2>
               <Post
-                key = {postData}
+                key = {postData.id}
                 post = {postData}
                 idPost = {postData.id}
                 votes = { postData.voteScore }
