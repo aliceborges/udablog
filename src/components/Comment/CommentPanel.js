@@ -9,7 +9,7 @@ import * as CommentsApi from '../../util/CommentsApi';
 import uuidv1 from 'uuid';
 import serializeForm from 'form-serialize';
 
-const mapStateToProps = (state, dispatch) => {
+const mapDispatchToProps = (state, dispatch) => {
   return {
     addComment: comment => dispatch(addComment(comment)),
     comment: state.comment
@@ -80,4 +80,4 @@ class CommentPanel extends Component{
   }
 }
 
-export default connect(mapStateToProps, null)(CommentPanel);
+export default connect(null, mapDispatchToProps)(CommentPanel);
