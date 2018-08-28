@@ -71,7 +71,7 @@ class EditPost extends Component{
                     <option
                       key={category.path}
                       value={category.path}
-                      selected={ post.category == category.path }
+                      selected={ post.category === category.path }
                     >{category.name}</option>
                   ))}
                 </FormControl>

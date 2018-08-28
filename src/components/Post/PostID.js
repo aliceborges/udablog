@@ -65,6 +65,10 @@ class Post extends Component{
     });
   };
 
+  edditedPost = (postData) =>{
+    this.setState({post: postData});
+  }
+
   onRemove(){
     window.location.href = "/";
   };
@@ -98,6 +102,7 @@ class Post extends Component{
                 key = {post.id}
                 idPost = {post.id}
                 post = {post}
+                edditedPost = { this.edditedPost }
               ></EditPost>
             </Panel.Body>
             <Panel.Footer>
