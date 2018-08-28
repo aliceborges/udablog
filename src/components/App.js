@@ -47,8 +47,8 @@ class App extends Component {
         </Navbar>
         <Grid>
           <Route exact path="/" component={ListPosts}/>
-          <Route path="/:category/:post_id" component={PostID}/>
-          <Route path="/:category" component={Category}/>
+          <Route exact path="/:category/:post_id" component={PostID}/>
+          <Route exact path="/:category" component={Category}/>
         </Grid>
       </div>
     );
