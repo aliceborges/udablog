@@ -46,7 +46,7 @@ class Post extends Component{
   refresh = (category, id) => {
 		PostApi.get(id).then((postData) => {
       if (postData.category == category){
-			  this.setState({ post: postData, votes: postData.voteScore });
+			  this.setState({ post: postData });
       }
     });
 	};
@@ -63,7 +63,11 @@ class Post extends Component{
       this.setState({post});
       this.props.editPost(post);
     });
-  }
+  };
+
+  onRemove(){
+    window.location.href = "/";
+  };
 
   render(){
 
@@ -84,7 +88,8 @@ class Post extends Component{
               { post.body }
               <Button
                 onClick={() => {
-                  this.props.removePost(post.id)
+                  this.props.removePost(post.id),
+                  this.onRemove()
                 }}
               >
                 Remover Post
