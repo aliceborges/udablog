@@ -45,7 +45,7 @@ class Post extends Component{
 
   refresh = (category, id) => {
 		PostApi.get(id).then((postData) => {
-      if (postData.category == category){
+      if (postData.category === category){
 			  this.setState({ post: postData });
       }
     });
