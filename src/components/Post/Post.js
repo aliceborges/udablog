@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col, Panel, Button } from 'react-bootstrap';
 import EditPost from '../Modal/Post/Edit';
 import CommentPanel from '../Comment/CommentPanel';
-import { removePost } from '../../actions';
+import { removePost, editPost } from '../../actions';
 import * as PostApi from '../../util/PostApi';
 import * as CommentsApi from '../../util/CommentsApi';
 import { connect } from 'react-redux';
@@ -16,11 +16,13 @@ const mapDispatchToProps = dispatch => {
   return {
     removePost: idPost => (
       dispatch(removePost(idPost)),
-      PostApi.remove(idPost)
+      PostApi.remove(idPost)),
+    editPost: (post) => (
+      dispatch(editPost(post))
     )
   }
-
 };
+
 class Post extends Component{
 
   state = {
@@ -41,23 +43,17 @@ class Post extends Component{
       this.setState({ post: this.props.post });
 	}
 
-  refresh = (id) => {
-		PostApi.get(id).then((postData) => {
-			this.setState({ postData });
-		});
-	};
-
   addPostVote = (idComment) => {
-    PostApi.vote(idComment, UP_VOTE).then(() => {
-        this.setState({votes: this.state.votes + 1});
-        //this.onVote(this.state.votes);
+    PostApi.vote(idComment, UP_VOTE).then((post) => {
+        this.setState({post});
+        this.props.editPost(post);
     });
   };
 
   removePostVote = (idComment) => {
-    PostApi.vote(idComment, DOWN_VOTE).then(() => {
-      this.setState({ votes: this.state.votes -1});
-      //this.onVote(this.state.votes);
+    PostApi.vote(idComment, DOWN_VOTE).then((post) => {
+      this.setState({post});
+      this.props.editPost(post);
     });
   }
 
